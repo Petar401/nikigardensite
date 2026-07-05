@@ -120,7 +120,7 @@ export default function Home() {
                 margin: "22px 0 0",
                 fontFamily: "var(--font-heading)",
                 fontWeight: 700,
-                fontSize: 76,
+                fontSize: "clamp(44px, 9vw, 76px)",
                 lineHeight: 0.94,
                 letterSpacing: 0.3,
                 color: "#ffffff",
@@ -160,6 +160,7 @@ export default function Home() {
           </div>
         </div>
         <div
+          className="hero-badge"
           style={{
             position: "absolute",
             right: 56,
@@ -227,7 +228,7 @@ export default function Home() {
 
       {/* ============ ABOUT NIKI ============ */}
       <section style={{ maxWidth: 1200, margin: "0 auto", padding: "84px 24px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "center" }}>
+        <div className="split-2">
           <div style={{ position: "relative" }}>
             <div
               style={{
@@ -262,7 +263,7 @@ export default function Home() {
           </div>
           <div>
             <div className="kicker">ABOUT NIKI</div>
-            <h2 style={{ margin: "10px 0 0", fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 44, lineHeight: 1.02, color: "#14432a" }}>
+            <h2 style={{ margin: "10px 0 0", fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "clamp(30px, 6vw, 44px)", lineHeight: 1.02, color: "#14432a" }}>
               A local gardener who actually turns up.
             </h2>
             <p style={{ margin: "18px 0 0", fontSize: 17, lineHeight: 1.6, color: "#3c4837" }}>
@@ -349,10 +350,10 @@ export default function Home() {
 
       {/* ============ SERVICE AREA ============ */}
       <section style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px 90px" }}>
-        <div style={{ background: "#e7ddc7", borderRadius: 18, overflow: "hidden", display: "grid", gridTemplateColumns: "1.1fr 1fr" }}>
+        <div className="split-media" style={{ background: "#e7ddc7", borderRadius: 18, overflow: "hidden" }}>
           <div style={{ padding: "52px 48px" }}>
             <div className="kicker">WHERE I WORK</div>
-            <h2 style={{ margin: "10px 0 0", fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 42, lineHeight: 1.02, color: "#14432a" }}>
+            <h2 style={{ margin: "10px 0 0", fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "clamp(30px, 6vw, 42px)", lineHeight: 1.02, color: "#14432a" }}>
               Norwich &amp; 15 miles all around
             </h2>
             <p style={{ margin: "16px 0 0", fontSize: 16.5, lineHeight: 1.6, color: "#3c4837", maxWidth: 420 }}>

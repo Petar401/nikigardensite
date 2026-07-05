@@ -62,7 +62,7 @@ button {
   margin: 10px 0 0;
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 48px;
+  font-size: clamp(32px, 6vw, 48px);
   line-height: 1;
   color: var(--forest);
 }
@@ -249,4 +249,61 @@ textarea.fld {
   font-size: 13px;
   letter-spacing: 0.4px;
   color: var(--forest);
+}
+
+/* ---------- responsive layout helpers ---------- */
+
+.split-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.split-media {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 44px;
+  align-items: start;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 40px;
+}
+
+@media (max-width: 860px) {
+  .split-2,
+  .split-media,
+  .contact-grid,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .split-2 {
+    gap: 40px;
+  }
+  .footer-grid {
+    gap: 32px;
+  }
+  .hero-badge {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
 }

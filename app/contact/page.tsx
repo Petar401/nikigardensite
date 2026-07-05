@@ -19,7 +19,7 @@ export default function ContactPage() {
           <div style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 13, letterSpacing: 2.4, color: "#cfe8a8" }}>
             GET IN TOUCH
           </div>
-          <h1 style={{ margin: "12px 0 0", fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 62, lineHeight: 0.98, color: "#ffffff" }}>
+          <h1 style={{ margin: "12px 0 0", fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "clamp(38px, 9vw, 62px)", lineHeight: 0.98, color: "#ffffff" }}>
             Let&apos;s sort your garden out
           </h1>
           <p style={{ margin: "14px auto 0", maxWidth: 540, fontSize: 18, lineHeight: 1.55, color: "#e4ecdb" }}>
@@ -30,7 +30,7 @@ export default function ContactPage() {
       </section>
 
       {/* ============ CONTACT BODY ============ */}
-      <section style={{ maxWidth: 1120, margin: "0 auto", padding: "70px 24px 90px", display: "grid", gridTemplateColumns: "1.35fr 1fr", gap: 44, alignItems: "start" }}>
+      <section className="contact-grid" style={{ maxWidth: 1120, margin: "0 auto", padding: "70px 24px 90px" }}>
         {/* FORM */}
         <div style={{ background: "#fff", border: "1px solid #e6ddc6", borderRadius: 18, padding: "34px 34px 38px", boxShadow: "0 10px 30px rgba(20,60,36,.09)" }}>
           {submitted ? (
@@ -69,7 +69,7 @@ export default function ContactPage() {
                 Tell me a little about your garden — no detail too small.
               </p>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+              <div className="field-grid">
                 <label style={{ display: "block" }}>
                   <span className="field-label">Your name</span>
                   <input className="fld" type="text" placeholder="e.g. Sarah Miller" required />
