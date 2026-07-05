@@ -84,7 +84,7 @@ export default function ServicesPage() {
           <div style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 13, letterSpacing: 2.4, color: "#cfe8a8" }}>
             SERVICES &amp; PRICING
           </div>
-          <h1 style={{ margin: "12px 0 0", fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 62, lineHeight: 0.98, color: "#ffffff", textWrap: "balance" }}>
+          <h1 style={{ margin: "12px 0 0", fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "clamp(38px, 9vw, 62px)", lineHeight: 0.98, color: "#ffffff", textWrap: "balance" }}>
             Whatever your garden needs
           </h1>
           <p style={{ margin: "16px auto 0", maxWidth: 560, fontSize: 18, lineHeight: 1.55, color: "#e4ecdb" }}>
@@ -215,7 +215,7 @@ export default function ServicesPage() {
             <div style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 13, letterSpacing: 2.2, color: "#bfe88a" }}>
               GOOD TO KNOW
             </div>
-            <h2 style={{ margin: "10px 0 0", fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 48, lineHeight: 1, color: "#ffffff" }}>
+            <h2 style={{ margin: "10px 0 0", fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "clamp(32px, 6vw, 48px)", lineHeight: 1, color: "#ffffff" }}>
               Frequently asked questions
             </h2>
           </div>

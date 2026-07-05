@@ -34,7 +34,7 @@ export default function SiteFooter() {
                 marginTop: 6,
                 fontFamily: "var(--font-heading)",
                 fontWeight: 700,
-                fontSize: 38,
+                fontSize: "clamp(26px, 5vw, 38px)",
                 lineHeight: 1,
                 color: "#ffffff",
               }}
@@ -63,13 +63,11 @@ export default function SiteFooter() {
 
       {/* main footer */}
       <div
+        className="footer-grid"
         style={{
           maxWidth: 1200,
           margin: "0 auto",
           padding: "48px 24px 36px",
-          display: "grid",
-          gridTemplateColumns: "1.6fr 1fr 1fr",
-          gap: 40,
         }}
       >
         <div>

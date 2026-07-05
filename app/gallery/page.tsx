@@ -1,15 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import lawnStripes from "@/public/assets/lawn-stripes.jpg";
+import hedge from "@/public/assets/hedge.jpg";
+import flowerBed from "@/public/assets/flower-bed.jpg";
+import roseMulch from "@/public/assets/rose-mulch.jpg";
+import frontBg from "@/public/assets/front-bg.jpg";
 
 const PHOTOS = [
-  { src: "/assets/lawn-stripes.jpg", cat: "lawns", catLabel: "LAWNS", title: "Freshly striped back lawn" },
-  { src: "/assets/hedge.jpg", cat: "hedges", catLabel: "HEDGES", title: "Sharp, squared-off hedging" },
-  { src: "/assets/flower-bed.jpg", cat: "borders", catLabel: "BORDERS & BEDS", title: "Weeded & mulched border" },
-  { src: "/assets/rose-mulch.jpg", cat: "borders", catLabel: "BORDERS & BEDS", title: "Fresh bark chip rose bed" },
-  { src: "/assets/front-bg.jpg", cat: "lawns", catLabel: "LAWNS", title: "Front lawn at its best" },
+  { src: lawnStripes, cat: "lawns", catLabel: "LAWNS", title: "Freshly striped back lawn" },
+  { src: hedge, cat: "hedges", catLabel: "HEDGES", title: "Sharp, squared-off hedging" },
+  { src: flowerBed, cat: "borders", catLabel: "BORDERS & BEDS", title: "Weeded & mulched border" },
+  { src: roseMulch, cat: "borders", catLabel: "BORDERS & BEDS", title: "Fresh bark chip rose bed" },
+  { src: frontBg, cat: "lawns", catLabel: "LAWNS", title: "Front lawn at its best" },
 ];
 
 const FILTERS = [
@@ -33,7 +39,7 @@ export default function GalleryPage() {
       {/* ============ PAGE HEADER ============ */}
       <section style={{ maxWidth: 1200, margin: "0 auto", padding: "70px 24px 8px", textAlign: "center" }}>
         <div className="kicker">RECENT WORK</div>
-        <h1 style={{ margin: "12px 0 0", fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 62, lineHeight: 0.98, color: "#14432a" }}>
+        <h1 style={{ margin: "12px 0 0", fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "clamp(38px, 9vw, 62px)", lineHeight: 0.98, color: "#14432a" }}>
           Gardens I&apos;ve been looking after
         </h1>
         <p style={{ margin: "14px auto 0", maxWidth: 560, fontSize: 18, lineHeight: 1.55, color: "#5a6b52" }}>
@@ -79,9 +85,14 @@ export default function GalleryPage() {
       <section style={{ maxWidth: 1120, margin: "0 auto", padding: "28px 24px 90px" }}>
         <div style={{ columns: "3 300px", columnGap: 18 }}>
           {visible.map((p, i) => (
-            <button key={p.src} onClick={() => setLightbox(i)} className="gallery-tile">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={p.src} alt={p.title} style={{ display: "block", width: "100%", height: "auto" }} />
+            <button key={p.title} onClick={() => setLightbox(i)} className="gallery-tile">
+              <Image
+                src={p.src}
+                alt={p.title}
+                placeholder="blur"
+                sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw"
+                style={{ display: "block", width: "100%", height: "auto" }}
+              />
               <div
                 style={{
                   position: "absolute",
@@ -191,11 +202,12 @@ export default function GalleryPage() {
             &#8250;
           </button>
           <div onClick={(e) => e.stopPropagation()} style={{ maxWidth: 900, maxHeight: "82vh", display: "flex", flexDirection: "column", alignItems: "center" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={active.src}
               alt={active.title}
-              style={{ maxWidth: "100%", maxHeight: "72vh", borderRadius: 12, boxShadow: "0 20px 60px rgba(0,0,0,.5)" }}
+              placeholder="blur"
+              sizes="(max-width: 940px) 100vw, 900px"
+              style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "72vh", borderRadius: 12, boxShadow: "0 20px 60px rgba(0,0,0,.5)" }}
             />
             <div style={{ marginTop: 16, textAlign: "center" }}>
               <div style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 12, letterSpacing: 1.8, color: "#bfe88a" }}>
