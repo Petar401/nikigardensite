@@ -7,6 +7,7 @@ const LINKS = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/gallery", label: "Gallery" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -85,15 +86,21 @@ export default function SiteNav() {
         </Link>
 
         <nav style={{ display: "flex", gap: 26, alignItems: "center" }}>
-          {LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`nav-link${pathname === link.href ? " active" : ""}`}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {LINKS.map((link) => {
+            const active =
+              link.href === "/"
+                ? pathname === "/"
+                : pathname === link.href || pathname.startsWith(`${link.href}/`);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`nav-link${active ? " active" : ""}`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
