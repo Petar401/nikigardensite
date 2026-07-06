@@ -135,6 +135,7 @@ export default function SiteFooter() {
             <Link href="/" className="foot-link">Home</Link>
             <Link href="/services" className="foot-link">Services &amp; pricing</Link>
             <Link href="/gallery" className="foot-link">Recent work</Link>
+            <Link href="/blog" className="foot-link">Garden care blog</Link>
             <Link href="/contact" className="foot-link">Get a quote</Link>
           </div>
         </div>

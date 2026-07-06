@@ -457,4 +457,30 @@ export const KB: KbEntry[] = [
       "browse by type of work.",
     actions: [{ label: "View the gallery", href: "/gallery" }],
   },
+
+  // ---- Blog / advice ----
+  {
+    id: "blog",
+    keywords: [
+      "blog",
+      "advice",
+      "tips",
+      "guide",
+      "article",
+      "summer care",
+      "summer garden",
+      "when to water",
+      "watering tips",
+      "lawn brown",
+      "brown lawn",
+      "dry weather",
+      "heatwave",
+      "read",
+    ],
+    answer:
+      "There's a garden care blog with seasonal tips written for Norwich gardens. The latest one covers " +
+      "looking after your lawn and borders through the summer — watering, mowing in a heatwave and what to " +
+      "do after all that rain.",
+    actions: [{ label: "Read the blog", href: "/blog" }],
+  },
 ];
