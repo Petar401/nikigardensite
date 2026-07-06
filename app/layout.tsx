@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow, Barlow_Condensed, Barlow_Semi_Condensed, Caveat } from "next/font/google";
 import "./globals.css";
+import ChatWidget from "@/components/chatbot/ChatWidget";
 
 const barlow = Barlow({
   subsets: ["latin"],
@@ -90,6 +91,7 @@ export default function RootLayout({
         className={`${barlow.variable} ${barlowCondensed.variable} ${barlowSemiCondensed.variable} ${caveat.variable}`}
       >
         {children}
+        <ChatWidget />
       </body>
     </html>
   );
