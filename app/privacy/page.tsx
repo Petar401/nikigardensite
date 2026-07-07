@@ -140,7 +140,7 @@ export default function PrivacyPage() {
             use it. Email <a href="mailto:hello@nikislawngardens.co.uk">hello@nikislawngardens.co.uk</a> and
             we&apos;ll respond within a month. If you&apos;re not happy with our
             reply you have the right to complain to the Information
-            Commissioner&apos;s Office at <a href="https://ico.org.uk" rel="noopener noreferrer">ico.org.uk</a>.
+            Commissioner&apos;s Office at <a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer">ico.org.uk</a>.
           </p>
 
           <h2>Changes to this policy</h2>

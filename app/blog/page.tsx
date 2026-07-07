@@ -15,7 +15,14 @@ export const metadata: Metadata = {
     title: "Garden Care Blog | Niki's Lawn & Garden Services",
     description:
       "Seasonal garden advice from a local Norwich gardener — practical tips on lawns, borders, hedges and watering across Norwich and Norfolk.",
-    images: [{ url: "/assets/summer-garden-care.jpg", width: 1366, height: 768 }],
+    images: [
+      {
+        url: "/assets/summer-garden-care.jpg",
+        width: 1366,
+        height: 768,
+        alt: "A freshly striped green lawn beside a Norfolk cottage with borders in full summer bloom near Norwich",
+      },
+    ],
   },
 };
 

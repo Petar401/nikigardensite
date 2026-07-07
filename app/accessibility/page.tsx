@@ -70,6 +70,7 @@ export default function AccessibilityPage() {
             We&apos;re working towards conformance with the{" "}
             <a
               href="https://www.w3.org/TR/WCAG22/"
+              target="_blank"
               rel="noopener noreferrer"
             >
               Web Content Accessibility Guidelines (WCAG) 2.2
