@@ -158,7 +158,7 @@ export default function GalleryPage() {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              setLightbox((lightbox - 1 + visible.length) % visible.length);
+              setLightbox((v) => (v - 1 + visible.length) % visible.length);
             }}
             aria-label="Previous photo"
             style={{
@@ -181,7 +181,7 @@ export default function GalleryPage() {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              setLightbox((lightbox + 1) % visible.length);
+              setLightbox((v) => (v + 1) % visible.length);
             }}
             aria-label="Next photo"
             style={{

@@ -222,16 +222,26 @@ export default function SiteFooter() {
             </button>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <a href="https://facebook.com" style={{ display: "flex" }} aria-label="Facebook">
+            <a
+              href="https://www.facebook.com/profile.php?id=61561680606312"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: "flex" }}
+              aria-label="Facebook"
+            >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="#bfe88a">
                 <path d="M13 22v-8h2.7l.4-3H13V9c0-.9.2-1.5 1.5-1.5H16V4.8c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9V11H7.5v3H10v8h3z" />
               </svg>
             </a>
-            <a href="https://instagram.com" style={{ display: "flex" }} aria-label="Instagram">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#bfe88a" strokeWidth="2">
-                <rect x="3.4" y="3.4" width="17.2" height="17.2" rx="5"></rect>
-                <circle cx="12" cy="12" r="4"></circle>
-                <circle cx="17" cy="7" r="1.25" fill="#bfe88a" stroke="none"></circle>
+            <a
+              href="https://www.tiktok.com/@nikisserviceshg?is_from_webapp=1&sender_device=pc"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: "flex" }}
+              aria-label="TikTok"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#bfe88a">
+                <path d="M16.5 3c.4 1.7 1.4 3 3 3.6.7.3 1.5.4 2.3.4v3.1c-1.9 0-3.6-.6-5-1.7v6.9a6 6 0 1 1-6-6c.3 0 .6 0 .9.1v3.2a2.8 2.8 0 1 0 1.9 2.7V3h2.9z" />
               </svg>
             </a>
           </div>

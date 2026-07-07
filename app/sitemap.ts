@@ -2,9 +2,12 @@ import type { MetadataRoute } from "next";
 import { POSTS } from "./blog/posts";
 
 const SITE_URL = "https://www.nikislawngardens.co.uk";
+// Bump when the static site copy changes so crawlers see a real update instead
+// of a fresh timestamp on every build.
+const SITE_UPDATED_AT = new Date("2026-07-07");
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
+  const lastModified = SITE_UPDATED_AT;
   const pages = ["", "/services", "/gallery", "/blog", "/contact"];
   const legalPages = ["/privacy", "/accessibility"];
 

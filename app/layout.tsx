@@ -88,7 +88,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en-GB">
       <body
         className={`${barlow.variable} ${barlowCondensed.variable} ${barlowSemiCondensed.variable} ${caveat.variable}`}
       >

@@ -41,6 +41,7 @@ export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([GREETING]);
   const [input, setInput] = useState("");
+  const [restored, setRestored] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -55,15 +56,17 @@ export default function ChatWidget() {
     } catch {
       /* ignore malformed storage */
     }
+    setRestored(true);
   }, []);
 
   useEffect(() => {
+    if (!restored) return;
     try {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
     } catch {
       /* storage unavailable — no problem, chat still works in-memory */
     }
-  }, [messages]);
+  }, [messages, restored]);
 
   // Keep the latest message in view; focus the input when the panel opens.
   useEffect(() => {
