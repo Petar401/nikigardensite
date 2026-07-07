@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 export default function SiteFooter() {
@@ -184,8 +186,40 @@ export default function SiteFooter() {
             flexWrap: "wrap",
           }}
         >
-          <div style={{ fontFamily: "var(--font-label)", fontWeight: 600, fontSize: 12.5, letterSpacing: 0.4, color: "#9fb389" }}>
-            Fully insured &middot; Waste-carrier licensed &middot; &copy; 2026 Niki&apos;s Lawn &amp; Garden Services
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 14,
+              flexWrap: "wrap",
+              fontFamily: "var(--font-label)",
+              fontWeight: 600,
+              fontSize: 12.5,
+              letterSpacing: 0.4,
+              color: "#9fb389",
+            }}
+          >
+            <span>
+              Fully insured &middot; Waste-carrier licensed &middot; &copy; 2026 Niki&apos;s Lawn &amp; Garden Services
+            </span>
+            <span aria-hidden="true" style={{ opacity: 0.5 }}>·</span>
+            <Link href="/privacy" className="foot-link" style={{ fontSize: 12.5, fontWeight: 600 }}>
+              Privacy
+            </Link>
+            <Link href="/accessibility" className="foot-link" style={{ fontSize: 12.5, fontWeight: 600 }}>
+              Accessibility
+            </Link>
+            <button
+              type="button"
+              className="foot-link-button"
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  window.dispatchEvent(new Event("nlg:open-cookie-prefs"));
+                }
+              }}
+            >
+              Cookie preferences
+            </button>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <a href="https://facebook.com" style={{ display: "flex" }} aria-label="Facebook">

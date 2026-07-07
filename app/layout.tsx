@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Barlow, Barlow_Condensed, Barlow_Semi_Condensed, Caveat } from "next/font/google";
 import "./globals.css";
 import ChatWidget from "@/components/chatbot/ChatWidget";
+import CookieConsent from "@/components/CookieConsent";
+import AccessibilityWidget from "@/components/AccessibilityWidget";
 
 const barlow = Barlow({
   subsets: ["latin"],
@@ -92,6 +94,8 @@ export default function RootLayout({
       >
         {children}
         <ChatWidget />
+        <AccessibilityWidget />
+        <CookieConsent />
       </body>
     </html>
   );
