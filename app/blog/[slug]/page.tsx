@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import JsonLd from "@/components/JsonLd";
+import { SITE_URL, SITE_NAME, BUSINESS_ID } from "@/lib/site";
 import { POSTS, getPost } from "../posts";
 import SummerGardenCareNorwich from "../_content/summer-garden-care-norwich";
-
-const SITE_URL = "https://www.nikislawngardens.co.uk";
-const SITE_NAME = "Niki's Lawn & Garden Services";
 
 /** Maps a post slug to the component that renders its body. */
 const BODIES: Record<string, React.ComponentType> = {
@@ -60,7 +60,7 @@ export default async function BlogPostPage({
   const Body = BODIES[slug];
   if (!post || !Body) notFound();
 
-  const jsonLd = {
+  const blogPosting = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
@@ -68,28 +68,45 @@ export default async function BlogPostPage({
     image: `${SITE_URL}${post.image}`,
     datePublished: post.dateISO,
     dateModified: post.dateISO,
-    author: { "@type": "Organization", name: SITE_NAME },
+    author: { "@type": "Organization", name: SITE_NAME, "@id": BUSINESS_ID },
     publisher: {
       "@type": "Organization",
       name: SITE_NAME,
+      "@id": BUSINESS_ID,
       logo: { "@type": "ImageObject", url: `${SITE_URL}/assets/logo.jpg` },
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/blog/${post.slug}` },
     keywords: post.keywords.join(", "),
   };
 
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+      { "@type": "ListItem", position: 3, name: post.title, item: `${SITE_URL}/blog/${post.slug}` },
+    ],
+  };
+
   return (
     <>
       <SiteNav />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={[blogPosting, breadcrumbs]} />
 
       {/* ============ ARTICLE HERO ============ */}
       <section style={{ position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: `url('${post.image}')`, backgroundSize: "cover", backgroundPosition: "center 60%" }} />
+        <div style={{ position: "absolute", inset: 0 }}>
+          <Image
+            src={post.image}
+            alt={post.imageAlt}
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: "cover", objectPosition: "center 60%" }}
+          />
+        </div>
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(9,24,14,.72), rgba(9,24,14,.72))" }} />
         <div style={{ position: "relative", maxWidth: 820, margin: "0 auto", padding: "60px 24px 64px" }}>
           <Link href="/blog" style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 12.5, letterSpacing: 1.6, textTransform: "uppercase", color: "#cfe8a8", textDecoration: "none" }}>

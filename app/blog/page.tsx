@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -33,7 +34,16 @@ export default function BlogPage() {
 
       {/* ============ PAGE HEADER ============ */}
       <section style={{ position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "url('/assets/summer-garden-care.jpg') center 60%/cover no-repeat" }} />
+        <div style={{ position: "absolute", inset: 0 }}>
+          <Image
+            src="/assets/summer-garden-care.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: "cover", objectPosition: "center 60%" }}
+          />
+        </div>
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(9,24,14,.78), rgba(9,24,14,.66))" }} />
         <div style={{ position: "relative", maxWidth: 1200, margin: "0 auto", padding: "64px 24px 68px", textAlign: "center" }}>
           <div style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 13, letterSpacing: 2.4, color: "#cfe8a8" }}>
@@ -54,7 +64,15 @@ export default function BlogPage() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 26 }}>
           {POSTS.map((p) => (
             <Link key={p.slug} href={`/blog/${p.slug}`} className="service-card">
-              <div style={{ height: 200, backgroundImage: `url('${p.image}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
+              <div style={{ position: "relative", height: 200 }}>
+                <Image
+                  src={p.image}
+                  alt={p.imageAlt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 360px"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
               <div style={{ padding: "22px 22px 24px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
                   <span style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 11.5, letterSpacing: 1, textTransform: "uppercase", color: "#5f8a2e", background: "#eef4e2", borderRadius: 20, padding: "4px 11px" }}>

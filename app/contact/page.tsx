@@ -1,19 +1,28 @@
-"use client";
-
-import { useState } from "react";
+import Image from "next/image";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import ContactForm from "./ContactForm";
+import { SAME_AS } from "@/lib/site";
+
+const GBP_URL = SAME_AS.find((u) => u.includes("google")) ?? "";
 
 export default function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
-
   return (
     <>
       <SiteNav />
 
       {/* ============ PAGE HEADER ============ */}
       <section style={{ position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "url('/assets/lawn-stripes.jpg') center 40%/cover no-repeat" }} />
+        <div style={{ position: "absolute", inset: 0 }}>
+          <Image
+            src="/assets/lawn-stripes.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: "cover", objectPosition: "center 40%" }}
+          />
+        </div>
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(9,24,14,.8), rgba(9,24,14,.66))" }} />
         <div style={{ position: "relative", maxWidth: 1200, margin: "0 auto", padding: "60px 24px 64px", textAlign: "center" }}>
           <div style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 13, letterSpacing: 2.4, color: "#cfe8a8" }}>
@@ -30,93 +39,10 @@ export default function ContactPage() {
       </section>
 
       {/* ============ CONTACT BODY ============ */}
-      <section className="contact-grid" style={{ maxWidth: 1120, margin: "0 auto", padding: "70px 24px 90px" }}>
+      <section className="contact-grid" style={{ maxWidth: 1120, margin: "0 auto", padding: "70px 24px 40px" }}>
         {/* FORM */}
         <div style={{ background: "#fff", border: "1px solid #e6ddc6", borderRadius: 18, padding: "34px 34px 38px", boxShadow: "0 10px 30px rgba(20,60,36,.09)" }}>
-          {submitted ? (
-            <div style={{ textAlign: "center", padding: "36px 10px" }}>
-              <div style={{ width: 72, height: 72, margin: "0 auto", borderRadius: "50%", background: "#e2eecb", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#5f8a2e" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 6 9 17l-5-5"></path>
-                </svg>
-              </div>
-              <h2 style={{ margin: "22px 0 0", fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 34, color: "#14432a" }}>
-                Thanks — message sent!
-              </h2>
-              <p style={{ margin: "12px auto 0", maxWidth: 360, fontSize: 16.5, lineHeight: 1.55, color: "#5a6b52" }}>
-                I&apos;ll be in touch very soon with your free quote. Need me sooner? Give me a ring on{" "}
-                <strong style={{ color: "#14432a" }}>07843 818290</strong>.
-              </p>
-              <button
-                onClick={() => setSubmitted(false)}
-                className="btn btn-outline"
-                style={{ marginTop: 24, fontSize: 14, letterSpacing: 0.5, padding: "11px 20px", borderRadius: 9 }}
-              >
-                Send another
-              </button>
-            </div>
-          ) : (
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setSubmitted(true);
-              }}
-            >
-              <h2 style={{ margin: 0, fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 30, color: "#14432a" }}>
-                Request a free quote
-              </h2>
-              <p style={{ margin: "8px 0 24px", fontSize: 15, color: "#5a6b52" }}>
-                Tell me a little about your garden — no detail too small.
-              </p>
-
-              <div className="field-grid">
-                <label style={{ display: "block" }}>
-                  <span className="field-label">Your name</span>
-                  <input className="fld" type="text" placeholder="e.g. Sarah Miller" required />
-                </label>
-                <label style={{ display: "block" }}>
-                  <span className="field-label">Phone</span>
-                  <input className="fld" type="tel" placeholder="07…" required />
-                </label>
-                <label style={{ display: "block" }}>
-                  <span className="field-label">Email</span>
-                  <input className="fld" type="email" placeholder="you@email.com" />
-                </label>
-                <label style={{ display: "block" }}>
-                  <span className="field-label">Postcode</span>
-                  <input className="fld" type="text" placeholder="NR…" />
-                </label>
-              </div>
-
-              <label style={{ display: "block", marginTop: 16 }}>
-                <span className="field-label">What do you need?</span>
-                <select className="fld" defaultValue="Regular lawn mowing">
-                  <option>Regular lawn mowing</option>
-                  <option>Hedge trimming</option>
-                  <option>Borders &amp; beds</option>
-                  <option>Garden clearance / tidy</option>
-                  <option>A mix of things</option>
-                  <option>Not sure — need advice</option>
-                </select>
-              </label>
-
-              <label style={{ display: "block", marginTop: 16 }}>
-                <span className="field-label">A bit more detail</span>
-                <textarea className="fld" placeholder="Garden size, how often you'd like visits, anything specific…" />
-              </label>
-
-              <button
-                type="submit"
-                className="btn btn-cta"
-                style={{ marginTop: 22, width: "100%", fontSize: 17, letterSpacing: 0.6, padding: 16, borderRadius: 10, boxShadow: "0 6px 18px rgba(244,161,29,.35)" }}
-              >
-                Send my request &rarr;
-              </button>
-              <p style={{ margin: "12px 0 0", textAlign: "center", fontSize: 13, color: "#a3ac96" }}>
-                Or call direct on 07843 818290 &middot; First visit gets 20% off
-              </p>
-            </form>
-          )}
+          <ContactForm />
         </div>
 
         {/* DETAILS SIDEBAR */}
@@ -150,6 +76,20 @@ export default function ContactPage() {
                 </svg>
                 Mon&ndash;Sat, 8am&ndash;6pm
               </div>
+              {GBP_URL && (
+                <a
+                  href={GBP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: "flex", alignItems: "center", gap: 11, color: "#e7ddc7", textDecoration: "none", fontSize: 15.5 }}
+                >
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#bfe88a" strokeWidth="2">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" />
+                  </svg>
+                  Find us on Google
+                </a>
+              )}
             </div>
           </div>
 
@@ -179,6 +119,34 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ============ SERVICE AREA MAP ============ */}
+      <section style={{ maxWidth: 1120, margin: "0 auto", padding: "0 24px 90px" }}>
+        <div style={{ textAlign: "center", marginBottom: 20 }}>
+          <div className="kicker">WHERE I WORK</div>
+          <h2 style={{ margin: "8px 0 0", fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "clamp(26px, 5vw, 36px)", lineHeight: 1.05, color: "#14432a" }}>
+            Covering Norwich &amp; 15 miles around
+          </h2>
+        </div>
+        <div
+          style={{
+            borderRadius: 16,
+            overflow: "hidden",
+            border: "1px solid #e6ddc6",
+            boxShadow: "0 10px 30px rgba(20,60,36,.09)",
+            aspectRatio: "16/9",
+            background: "#e7ddc7",
+          }}
+        >
+          <iframe
+            title="Map of Norwich service area"
+            src="https://www.google.com/maps?q=Norwich%2C+Norfolk%2C+UK&z=10&output=embed"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            style={{ width: "100%", height: "100%", border: 0, display: "block" }}
+          />
         </div>
       </section>
 

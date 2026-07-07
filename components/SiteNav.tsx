@@ -1,7 +1,6 @@
-"use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Image from "next/image";
+import NavLink from "./NavLink";
 
 const LINKS = [
   { href: "/", label: "Home" },
@@ -12,8 +11,6 @@ const LINKS = [
 ];
 
 export default function SiteNav() {
-  const pathname = usePathname();
-
   return (
     <header
       style={{
@@ -50,14 +47,24 @@ export default function SiteNav() {
           <div
             style={{
               flex: "0 0 auto",
+              position: "relative",
               width: 44,
               height: 44,
               borderRadius: "50%",
-              background: "#f4efe1 url('/assets/logo.jpg') center/cover no-repeat",
+              overflow: "hidden",
+              background: "#f4efe1",
               boxShadow: "0 1px 5px rgba(20,60,36,.28)",
               border: "1.5px solid #14432a",
             }}
-          />
+          >
+            <Image
+              src="/assets/logo.jpg"
+              alt="Niki's Lawn & Garden logo"
+              fill
+              sizes="44px"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
           <div style={{ lineHeight: 1 }}>
             <div
               style={{
@@ -86,21 +93,9 @@ export default function SiteNav() {
         </Link>
 
         <nav style={{ display: "flex", gap: 26, alignItems: "center" }}>
-          {LINKS.map((link) => {
-            const active =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname === link.href || pathname.startsWith(`${link.href}/`);
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`nav-link${active ? " active" : ""}`}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+          {LINKS.map((link) => (
+            <NavLink key={link.href} href={link.href} label={link.label} />
+          ))}
         </nav>
 
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>

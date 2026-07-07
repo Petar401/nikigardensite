@@ -1,14 +1,16 @@
-"use client";
-
-import { useState } from "react";
+import Image from "next/image";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import JsonLd from "@/components/JsonLd";
+import { SITE_URL, SITE_NAME, BUSINESS_ID, AREAS_SERVED } from "@/lib/site";
+import FaqAccordion, { type Faq } from "./FaqAccordion";
 
 const SERVICES = [
   {
     kicker: "LAWN CARE",
     title: "Lawns",
     bg: "/assets/lawn-stripes.jpg",
+    bgAlt: "Freshly striped Norwich lawn after a mowing visit",
     reverse: false,
     desc: "The heart of most gardens. I’ll keep yours neat, healthy and striped — from a quick weekly cut to reviving a tired lawn or laying fresh turf.",
     items: ["Mowing & edging", "Decorative striping", "Feeding & weed control", "Scarifying & aerating", "Fresh turf laid", "Seasonal treatments"],
@@ -17,6 +19,7 @@ const SERVICES = [
     kicker: "HEDGES & TREES",
     title: "Hedges & Trees",
     bg: "/assets/hedge.jpg",
+    bgAlt: "Neatly trimmed hedge along a Norwich garden path",
     reverse: true,
     desc: "Crisp, healthy hedges and well-shaped trees. I’ll trim, shape and reduce sensibly, then clear every last cutting away.",
     items: ["Hedge trimming", "Shaping & topiary", "Pruning", "Height reductions", "Overgrowth tidy-ups", "All waste removed"],
@@ -25,6 +28,7 @@ const SERVICES = [
     kicker: "BORDERS & BEDS",
     title: "Borders & Beds",
     bg: "/assets/flower-bed.jpg",
+    bgAlt: "Freshly weeded flower bed with mixed summer planting",
     reverse: false,
     desc: "Beds that look cared for all year. Planting, weeding and a fresh layer of mulch or bark to keep things tidy and thriving.",
     items: ["Planting", "Weeding", "Mulching", "Bark chip", "Bed re-edging", "Seasonal colour"],
@@ -33,6 +37,7 @@ const SERVICES = [
     kicker: "THE BIGGER JOBS",
     title: "Clearances & Tidies",
     bg: "/assets/rose-mulch.jpg",
+    bgAlt: "Rose border after a full seasonal tidy and fresh mulch",
     reverse: true,
     desc: "Let it get away from you? No problem. From full overgrown clearances to a one-off tidy before guests arrive, I’ll get it back under control.",
     items: ["Full clearances", "One-off tidies", "Seasonal blitzes", "Rubbish removal", "Overgrown gardens", "Pre-sale spruce-ups"],
@@ -46,7 +51,7 @@ const PRICES = [
   { name: "Garden Clearance", price: "£150", unit: "per project", popular: false, feats: ["Overgrown gardens", "Full waste removal", "Quoted after a look"] },
 ];
 
-const FAQS = [
+const FAQS: Faq[] = [
   {
     q: "How do I get a quote?",
     a: "Just call or drop me a message through the contact page with your postcode and a rough idea of what you need. Most quotes are free and I’ll usually pop round for a quick look before giving you a firm price.",
@@ -69,16 +74,46 @@ const FAQS = [
   },
 ];
 
-export default function ServicesPage() {
-  const [open, setOpen] = useState(0);
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
 
+const serviceSchemas = SERVICES.map((s) => ({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: s.title,
+  serviceType: s.title,
+  description: s.desc,
+  provider: { "@id": BUSINESS_ID, "@type": "LocalBusiness", name: SITE_NAME, url: SITE_URL },
+  areaServed: AREAS_SERVED.map((name) => ({ "@type": "City", name })),
+  url: `${SITE_URL}/services`,
+}));
+
+export default function ServicesPage() {
   return (
     <>
       <SiteNav />
 
+      <JsonLd data={[faqSchema, ...serviceSchemas]} />
+
       {/* ============ PAGE HEADER ============ */}
       <section style={{ position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "url('/assets/flower-bed.jpg') center 60%/cover no-repeat" }} />
+        <div style={{ position: "absolute", inset: 0 }}>
+          <Image
+            src="/assets/flower-bed.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: "cover", objectPosition: "center 60%" }}
+          />
+        </div>
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(9,24,14,.78), rgba(9,24,14,.66))" }} />
         <div style={{ position: "relative", maxWidth: 1200, margin: "0 auto", padding: "64px 24px 68px", textAlign: "center" }}>
           <div style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 13, letterSpacing: 2.4, color: "#cfe8a8" }}>
@@ -101,15 +136,21 @@ export default function ServicesPage() {
             <div style={{ flex: "1 1 0", minWidth: 280 }}>
               <div
                 style={{
+                  position: "relative",
                   borderRadius: 16,
                   overflow: "hidden",
                   boxShadow: "0 18px 44px rgba(20,60,36,.2)",
                   aspectRatio: "5/4",
-                  backgroundImage: `url('${s.bg}')`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
                 }}
-              />
+              >
+                <Image
+                  src={s.bg}
+                  alt={s.bgAlt}
+                  fill
+                  sizes="(max-width: 900px) 100vw, 540px"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
             </div>
             <div style={{ flex: "1 1 0", minWidth: 280 }}>
               <div style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 12.5, letterSpacing: 2, color: "#5f8a2e" }}>
@@ -219,59 +260,7 @@ export default function ServicesPage() {
               Frequently asked questions
             </h2>
           </div>
-          <div style={{ marginTop: 40, display: "flex", flexDirection: "column", gap: 12 }}>
-            {FAQS.map((f, i) => {
-              const isOpen = open === i;
-              return (
-                <div key={f.q} style={{ background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.12)", borderRadius: 12, overflow: "hidden" }}>
-                  <button
-                    onClick={() => setOpen(isOpen ? -1 : i)}
-                    style={{
-                      width: "100%",
-                      textAlign: "left",
-                      background: "transparent",
-                      border: "none",
-                      cursor: "pointer",
-                      padding: "20px 22px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      gap: 16,
-                      fontFamily: "var(--font-label)",
-                      fontWeight: 700,
-                      fontSize: 19,
-                      color: "#ffffff",
-                    }}
-                  >
-                    {f.q}
-                    <span
-                      style={{
-                        flex: "0 0 auto",
-                        width: 28,
-                        height: 28,
-                        borderRadius: "50%",
-                        background: isOpen ? "#bfe88a" : "rgba(255,255,255,.12)",
-                        color: isOpen ? "#14432a" : "#bfe88a",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: 22,
-                        fontWeight: 400,
-                        lineHeight: 1,
-                        transform: isOpen ? "rotate(45deg)" : "none",
-                        transition: "transform .2s, background .2s",
-                      }}
-                    >
-                      +
-                    </span>
-                  </button>
-                  {isOpen && (
-                    <div style={{ padding: "0 22px 22px", fontSize: 16, lineHeight: 1.6, color: "#c3d1b6" }}>{f.a}</div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+          <FaqAccordion faqs={FAQS} />
         </div>
       </section>
 
