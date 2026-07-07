@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -7,21 +8,25 @@ const SERVICES = [
     title: "Lawns",
     desc: "Mowing & edging, crisp stripes, feeding and fresh turf laid.",
     bg: "/assets/lawn-stripes.jpg",
+    bgAlt: "Freshly striped Norwich lawn",
   },
   {
     title: "Hedges & Trees",
     desc: "Trimming, shaping, pruning and sensible reductions.",
     bg: "/assets/hedge.jpg",
+    bgAlt: "Neatly trimmed garden hedge",
   },
   {
     title: "Borders & Beds",
     desc: "Planting, weeding, mulching and fresh bark chip.",
     bg: "/assets/flower-bed.jpg",
+    bgAlt: "Tidy summer flower bed",
   },
   {
     title: "The Bigger Jobs",
     desc: "Full clearances plus one-off and seasonal tidies.",
     bg: "/assets/rose-mulch.jpg",
+    bgAlt: "Rose border after a full seasonal tidy",
   },
 ];
 
@@ -30,28 +35,6 @@ const REASONS = [
   { stat: "Spotless", title: "Left tidy after", desc: "Clippings cleared and paths swept before I leave." },
   { stat: "Insured", title: "Fully covered", desc: "Public liability insured and waste-carrier licensed." },
   { stat: "Local", title: "Norwich born & based", desc: "A familiar face who knows the local gardens well." },
-];
-
-const REVIEWS = [
-  {
-    quote:
-      "“Niki has completely transformed our lawn. Reliable, friendly and always leaves everything spotless. Wouldn’t use anyone else.”",
-    initial: "S",
-    name: "Sarah M.",
-    area: "Thorpe St Andrew",
-  },
-  {
-    quote: "“Booked a one-off clearance and it turned into a regular thing. Fair price, brilliant job, lovely bloke.”",
-    initial: "D",
-    name: "David R.",
-    area: "Eaton, Norwich",
-  },
-  {
-    quote: "“Our hedges hadn’t been touched in years. Niki sorted them beautifully and cleared every last bit away.”",
-    initial: "J",
-    name: "Jenny & Paul",
-    area: "Hellesdon",
-  },
 ];
 
 const AREAS = [
@@ -74,13 +57,16 @@ export default function Home() {
 
       {/* ============ HERO ============ */}
       <section style={{ position: "relative", overflow: "hidden" }}>
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "url('/assets/front-bg.jpg') center 55%/cover no-repeat",
-          }}
-        />
+        <div style={{ position: "absolute", inset: 0 }}>
+          <Image
+            src="/assets/front-bg.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: "cover", objectPosition: "center 55%" }}
+          />
+        </div>
         <div
           style={{
             position: "absolute",
@@ -211,7 +197,15 @@ export default function Home() {
         <div style={{ marginTop: 44, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 22 }}>
           {SERVICES.map((s) => (
             <Link key={s.title} href="/services" className="service-card">
-              <div style={{ height: 168, backgroundImage: `url('${s.bg}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
+              <div style={{ position: "relative", height: 168 }}>
+                <Image
+                  src={s.bg}
+                  alt={s.bgAlt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 300px"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
               <div style={{ padding: "20px 20px 22px" }}>
                 <h3 style={{ margin: 0, fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 24, letterSpacing: 0.3, color: "#14432a" }}>
                   {s.title}
@@ -232,13 +226,21 @@ export default function Home() {
           <div style={{ position: "relative" }}>
             <div
               style={{
+                position: "relative",
                 borderRadius: 16,
                 overflow: "hidden",
                 boxShadow: "0 20px 50px rgba(20,60,36,.22)",
                 aspectRatio: "4/3",
-                background: "url('/assets/lawn-stripes.jpg') center/cover no-repeat",
               }}
-            />
+            >
+              <Image
+                src="/assets/lawn-stripes.jpg"
+                alt="Striped lawn cared for by Niki in Norwich"
+                fill
+                sizes="(max-width: 900px) 100vw, 540px"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
             <div
               style={{
                 position: "absolute",
@@ -320,36 +322,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ REVIEWS ============ */}
-      <section style={{ maxWidth: 1200, margin: "0 auto", padding: "84px 24px" }}>
-        <div style={{ textAlign: "center", maxWidth: 600, margin: "0 auto" }}>
-          <div className="kicker">KIND WORDS</div>
-          <h2 className="section-heading">What Norwich neighbours say</h2>
-        </div>
-        <div style={{ marginTop: 44, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 22 }}>
-          {REVIEWS.map((v) => (
-            <div key={v.name} style={{ background: "#fff", border: "1px solid #e6ddc6", borderRadius: 14, padding: "26px 24px", boxShadow: "0 6px 18px rgba(20,60,36,.06)" }}>
-              <div style={{ color: "#f4a11d", fontSize: 17, letterSpacing: 2 }}>&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-              <p style={{ margin: "14px 0 0", fontSize: 16, lineHeight: 1.6, color: "#3c4837" }}>{v.quote}</p>
-              <div style={{ marginTop: 18, display: "flex", alignItems: "center", gap: 11 }}>
-                <div style={{ width: 38, height: 38, borderRadius: "50%", background: "#e7ddc7", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 17, color: "#14432a" }}>
-                  {v.initial}
-                </div>
-                <div style={{ lineHeight: 1.2 }}>
-                  <div style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 14.5, color: "#14432a" }}>{v.name}</div>
-                  <div style={{ fontSize: 12.5, color: "#8a9680" }}>{v.area}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div style={{ marginTop: 16, textAlign: "center", fontSize: 13, color: "#a3ac96", fontStyle: "italic" }}>
-          Example reviews — swap these for your own once you&apos;ve collected a few.
-        </div>
-      </section>
-
       {/* ============ SERVICE AREA ============ */}
-      <section style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px 90px" }}>
+      <section style={{ maxWidth: 1200, margin: "0 auto", padding: "84px 24px 90px" }}>
         <div className="split-media" style={{ background: "#e7ddc7", borderRadius: 18, overflow: "hidden" }}>
           <div style={{ padding: "52px 48px" }}>
             <div className="kicker">WHERE I WORK</div>
@@ -375,7 +349,15 @@ export default function Home() {
               Check your postcode
             </Link>
           </div>
-          <div style={{ background: "url('/assets/hedge.jpg') center/cover no-repeat", minHeight: 340 }} />
+          <div style={{ position: "relative", minHeight: 340 }}>
+            <Image
+              src="/assets/hedge.jpg"
+              alt="Neat garden hedge along a Norfolk lane"
+              fill
+              sizes="(max-width: 900px) 100vw, 600px"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
         </div>
       </section>
 

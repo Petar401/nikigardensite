@@ -1,6 +1,10 @@
-"use client";
-
 import Link from "next/link";
+import Image from "next/image";
+import CookiePreferencesButton from "./CookiePreferencesButton";
+import { SAME_AS } from "@/lib/site";
+
+const FACEBOOK_URL = SAME_AS.find((u) => u.includes("facebook")) ?? "#";
+const TIKTOK_URL = SAME_AS.find((u) => u.includes("tiktok")) ?? "#";
 
 export default function SiteFooter() {
   return (
@@ -77,13 +81,23 @@ export default function SiteFooter() {
             <div
               style={{
                 flex: "0 0 auto",
+                position: "relative",
                 width: 46,
                 height: 46,
                 borderRadius: "50%",
-                background: "#f4efe1 url('/assets/logo.jpg') center/cover no-repeat",
+                overflow: "hidden",
+                background: "#f4efe1",
                 border: "1.5px solid #bfe88a",
               }}
-            />
+            >
+              <Image
+                src="/assets/logo.jpg"
+                alt="Niki's Lawn & Garden logo"
+                fill
+                sizes="46px"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
             <div style={{ lineHeight: 1 }}>
               <div
                 style={{
@@ -209,21 +223,11 @@ export default function SiteFooter() {
             <Link href="/accessibility" className="foot-link" style={{ fontSize: 12.5, fontWeight: 600 }}>
               Accessibility
             </Link>
-            <button
-              type="button"
-              className="foot-link-button"
-              onClick={() => {
-                if (typeof window !== "undefined") {
-                  window.dispatchEvent(new Event("nlg:open-cookie-prefs"));
-                }
-              }}
-            >
-              Cookie preferences
-            </button>
+            <CookiePreferencesButton />
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <a
-              href="https://www.facebook.com/profile.php?id=61561680606312"
+              href={FACEBOOK_URL}
               target="_blank"
               rel="noopener noreferrer"
               style={{ display: "flex" }}
@@ -234,7 +238,7 @@ export default function SiteFooter() {
               </svg>
             </a>
             <a
-              href="https://www.tiktok.com/@nikisserviceshg?is_from_webapp=1&sender_device=pc"
+              href={TIKTOK_URL}
               target="_blank"
               rel="noopener noreferrer"
               style={{ display: "flex" }}

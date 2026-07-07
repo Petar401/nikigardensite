@@ -1,9 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow, Barlow_Condensed, Barlow_Semi_Condensed, Caveat } from "next/font/google";
+import dynamic from "next/dynamic";
 import "./globals.css";
-import ChatWidget from "@/components/chatbot/ChatWidget";
-import CookieConsent from "@/components/CookieConsent";
-import AccessibilityWidget from "@/components/AccessibilityWidget";
+import JsonLd from "@/components/JsonLd";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, localBusinessSchema } from "@/lib/site";
+
+const ChatWidget = dynamic(() => import("@/components/chatbot/ChatWidget"));
+const AccessibilityWidget = dynamic(() => import("@/components/AccessibilityWidget"));
+const CookieConsent = dynamic(() => import("@/components/CookieConsent"));
 
 const barlow = Barlow({
   subsets: ["latin"],
@@ -32,11 +36,6 @@ const caveat = Caveat({
   variable: "--font-caveat",
   display: "swap",
 });
-
-const SITE_URL = "https://www.nikislawngardens.co.uk";
-const SITE_NAME = "Niki's Lawn & Garden Services";
-const SITE_DESCRIPTION =
-  "Reliable lawn mowing, hedge trimming, borders and garden clearances across Norwich and 15 miles around. Fully insured, waste-carrier licensed. Free quotes.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -92,6 +91,7 @@ export default function RootLayout({
       <body
         className={`${barlow.variable} ${barlowCondensed.variable} ${barlowSemiCondensed.variable} ${caveat.variable}`}
       >
+        <JsonLd data={localBusinessSchema()} />
         {children}
         <ChatWidget />
         <AccessibilityWidget />
