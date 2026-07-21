@@ -68,7 +68,7 @@ export default function SiteNav() {
                 color: "#14432a",
               }}
             >
-              NIKI&apos;S LAWN &amp; GARDEN
+              NIKI&apos;S LAWN &amp; GARDEN SERVICES
             </div>
             <div
               style={{
