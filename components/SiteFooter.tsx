@@ -160,8 +160,8 @@ export default function SiteFooter() {
             >
               07843 818290
             </a>
-            <a href="mailto:hello@nikislawngardens.co.uk" className="foot-link" style={{ fontSize: 14.5 }}>
-              hello@nikislawngardens.co.uk
+            <a href="mailto:info@nikislawngardens.co.uk" className="foot-link" style={{ fontSize: 14.5 }}>
+              info@nikislawngardens.co.uk
             </a>
             <div style={{ fontSize: 14.5, color: "#c3d1b6", lineHeight: 1.5 }}>
               Norwich &amp; 15 miles around

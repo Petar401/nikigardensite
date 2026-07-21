@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import { ElfsightReviews, BarkBadge } from "@/components/ReviewsWidgets";
 
 const SERVICES = [
   {
@@ -9,8 +10,8 @@ const SERVICES = [
     bg: "/assets/lawn-stripes.jpg",
   },
   {
-    title: "Hedges & Trees",
-    desc: "Trimming, shaping, pruning and sensible reductions.",
+    title: "Hedges, shrubs & small trees",
+    desc: "Trimming, shaping and sensible reductions — send photos for a fair quote.",
     bg: "/assets/hedge.jpg",
   },
   {
@@ -30,28 +31,6 @@ const REASONS = [
   { stat: "Spotless", title: "Left tidy after", desc: "Clippings cleared and paths swept before I leave." },
   { stat: "Insured", title: "Fully covered", desc: "Public liability insured and waste-carrier licensed." },
   { stat: "Local", title: "Norwich born & based", desc: "A familiar face who knows the local gardens well." },
-];
-
-const REVIEWS = [
-  {
-    quote:
-      "“Niki has completely transformed our lawn. Reliable, friendly and always leaves everything spotless. Wouldn’t use anyone else.”",
-    initial: "S",
-    name: "Sarah M.",
-    area: "Thorpe St Andrew",
-  },
-  {
-    quote: "“Booked a one-off clearance and it turned into a regular thing. Fair price, brilliant job, lovely bloke.”",
-    initial: "D",
-    name: "David R.",
-    area: "Eaton, Norwich",
-  },
-  {
-    quote: "“Our hedges hadn’t been touched in years. Niki sorted them beautifully and cleared every last bit away.”",
-    initial: "J",
-    name: "Jenny & Paul",
-    area: "Hellesdon",
-  },
 ];
 
 const AREAS = [
@@ -325,27 +304,14 @@ export default function Home() {
         <div style={{ textAlign: "center", maxWidth: 600, margin: "0 auto" }}>
           <div className="kicker">KIND WORDS</div>
           <h2 className="section-heading">What Norwich neighbours say</h2>
+          <p className="section-lede">
+            Real reviews from Niki&apos;s Google Business profile — updated automatically as new ones come in.
+          </p>
         </div>
-        <div style={{ marginTop: 44, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 22 }}>
-          {REVIEWS.map((v) => (
-            <div key={v.name} style={{ background: "#fff", border: "1px solid #e6ddc6", borderRadius: 14, padding: "26px 24px", boxShadow: "0 6px 18px rgba(20,60,36,.06)" }}>
-              <div style={{ color: "#f4a11d", fontSize: 17, letterSpacing: 2 }}>&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-              <p style={{ margin: "14px 0 0", fontSize: 16, lineHeight: 1.6, color: "#3c4837" }}>{v.quote}</p>
-              <div style={{ marginTop: 18, display: "flex", alignItems: "center", gap: 11 }}>
-                <div style={{ width: 38, height: 38, borderRadius: "50%", background: "#e7ddc7", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 17, color: "#14432a" }}>
-                  {v.initial}
-                </div>
-                <div style={{ lineHeight: 1.2 }}>
-                  <div style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 14.5, color: "#14432a" }}>{v.name}</div>
-                  <div style={{ fontSize: 12.5, color: "#8a9680" }}>{v.area}</div>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div style={{ marginTop: 36 }}>
+          <ElfsightReviews />
         </div>
-        <div style={{ marginTop: 16, textAlign: "center", fontSize: 13, color: "#a3ac96", fontStyle: "italic" }}>
-          Example reviews — swap these for your own once you&apos;ve collected a few.
-        </div>
+        <BarkBadge />
       </section>
 
       {/* ============ SERVICE AREA ============ */}
@@ -375,7 +341,18 @@ export default function Home() {
               Check your postcode
             </Link>
           </div>
-          <div style={{ background: "url('/assets/hedge.jpg') center/cover no-repeat", minHeight: 340 }} />
+          <div style={{ minHeight: 340, position: "relative" }}>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60324.50462952578!2d1.28649405!3d52.6410033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe8a3fb86db0cbbd%3A0x8d19b7ffe00d259b!2sNikis%20Lawn%20%26%20Garden%20Services!5e1!3m2!1sen!2suk!4v1784647946662!5m2!1sen!2suk"
+              title="Niki's Lawn & Garden Services on Google Maps"
+              width="100%"
+              height="100%"
+              style={{ border: 0, display: "block", minHeight: 340, position: "absolute", inset: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
         </div>
       </section>
 

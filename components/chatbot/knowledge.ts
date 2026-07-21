@@ -18,8 +18,8 @@ export const SITE_FACTS = {
   since: 2020,
   phoneDisplay: "07843 818290",
   phoneHref: "tel:+447843818290",
-  email: "hello@nikislawngardens.co.uk",
-  emailHref: "mailto:hello@nikislawngardens.co.uk",
+  email: "info@nikislawngardens.co.uk",
+  emailHref: "mailto:info@nikislawngardens.co.uk",
   hours: "Mon–Sat, 8am–6pm",
   areaSummary: "Norwich & roughly 15 miles around it",
   discount: "20% off your first visit",
@@ -97,7 +97,7 @@ export const KB: KbEntry[] = [
     answer:
       "Niki looks after the whole garden — the main services are:\n" +
       "• Lawns — mowing, edging, striping, feeding, scarifying and fresh turf\n" +
-      "• Hedges & Trees — trimming, shaping, pruning and sensible reductions\n" +
+      "• Hedges, shrubs & small trees — trimming, shaping and sensible reductions\n" +
       "• Borders & Beds — planting, weeding, mulching and fresh bark chip\n" +
       "• Clearances & Tidies — overgrown gardens, one-off tidies and full clear-outs\n" +
       "Which one would you like to know more about?",
@@ -149,7 +149,7 @@ export const KB: KbEntry[] = [
       "Lawns are the heart of most gardens. Niki keeps yours neat, healthy and striped — from a " +
       "quick weekly cut to reviving a tired lawn or laying fresh turf. That covers mowing & edging, " +
       "decorative striping, feeding & weed control, scarifying & aerating, fresh turf and seasonal " +
-      "treatments. Regular mowing starts from £20 per visit.",
+      "treatments. Regular mowing starts from £25 per visit.",
     actions: [{ label: "Lawn services & pricing", href: "/services" }],
   },
   {
@@ -171,10 +171,12 @@ export const KB: KbEntry[] = [
       "overgrown hedge",
     ],
     answer:
-      "Crisp, healthy hedges and well-shaped trees. Niki will trim, shape and reduce sensibly, then " +
-      "clear every last cutting away — including hedge trimming, shaping & topiary, pruning, height " +
-      "reductions and overgrowth tidy-ups. Hedge trimming starts from £45 per hedge.",
-    actions: [{ label: "Hedge & tree services", href: "/services" }],
+      "Crisp hedges, tidy shrubs and well-shaped small trees. Niki will trim, shape and reduce sensibly, " +
+      "then clear every last cutting away — including hedge trimming, shrub shaping, small-tree pruning, " +
+      "height reductions and overgrowth tidy-ups. Price depends on scope, access, height and waste " +
+      "handling, so hedge work is quoted from photos — you can attach them to the contact form. The price " +
+      "is always confirmed before any booking or payment.",
+    actions: [{ label: "Hedges, shrubs & small trees", href: "/services" }],
   },
   {
     id: "borders",
@@ -227,7 +229,7 @@ export const KB: KbEntry[] = [
     answer:
       "Let it get away from you? No problem. From full overgrown clearances to a one-off tidy before " +
       "guests arrive, Niki will get it back under control — full clearances, one-off tidies, seasonal " +
-      "blitzes, rubbish removal and pre-sale spruce-ups. Garden clearances start from £150 per project " +
+      "blitzes, rubbish removal and pre-sale spruce-ups. Garden clearances start from £110 per project " +
       "(quoted after a quick look).",
     actions: [{ label: "Clearances & tidies", href: "/services" }],
   },
@@ -253,10 +255,10 @@ export const KB: KbEntry[] = [
     answer:
       "Here are the guide starting prices — every garden's different, so you'll always get a firm price " +
       "before any work begins:\n" +
-      "• Regular mowing — from £20 per visit\n" +
-      "• Hedge trimming — from £45 per hedge\n" +
-      "• Borders & beds — from £35 per session\n" +
-      "• Garden clearance — from £150 per project\n" +
+      "• Regular mowing — from £25 per visit\n" +
+      "• Hedge / shrub / small-tree work — quoted from photos (varies by scope, access, height & waste)\n" +
+      "• Borders & beds — planting, weeding, mulching (quoted per job)\n" +
+      "• Garden clearance — from £110 per project\n" +
       "Prices depend on garden size, access and condition — and your first visit gets 20% off.",
     actions: [{ label: "Full pricing guide", href: "/services" }],
   },
@@ -414,7 +416,7 @@ export const KB: KbEntry[] = [
       "message",
     ],
     answer:
-      "You can reach Niki on 📞 07843 818290 or ✉️ hello@nikislawngardens.co.uk. He's around Mon–Sat, " +
+      "You can reach Niki on 📞 07843 818290 or ✉️ info@nikislawngardens.co.uk. He's around Mon–Sat, " +
       "8am–6pm, covering Norwich & 15 miles around.",
     actions: CONTACT_ACTIONS,
   },

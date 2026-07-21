@@ -14,12 +14,12 @@ const SERVICES = [
     items: ["Mowing & edging", "Decorative striping", "Feeding & weed control", "Scarifying & aerating", "Fresh turf laid", "Seasonal treatments"],
   },
   {
-    kicker: "HEDGES & TREES",
-    title: "Hedges & Trees",
+    kicker: "HEDGES, SHRUBS & SMALL TREES",
+    title: "Hedges, shrubs & small trees",
     bg: "/assets/hedge.jpg",
     reverse: true,
-    desc: "Crisp, healthy hedges and well-shaped trees. I’ll trim, shape and reduce sensibly, then clear every last cutting away.",
-    items: ["Hedge trimming", "Shaping & topiary", "Pruning", "Height reductions", "Overgrowth tidy-ups", "All waste removed"],
+    desc: "Crisp hedges, tidy shrubs and well-shaped small trees. I’ll trim, shape and reduce sensibly — then clear every last cutting away. Send photos through the contact form and I’ll confirm a fair price before we book anything.",
+    items: ["Hedge trimming", "Shrub shaping", "Small-tree pruning", "Height reductions", "Overgrowth tidy-ups", "All waste removed"],
   },
   {
     kicker: "BORDERS & BEDS",
@@ -39,11 +39,19 @@ const SERVICES = [
   },
 ];
 
-const PRICES = [
-  { name: "Regular Mowing", price: "£20", unit: "per visit", popular: false, feats: ["Mow, edge & stripe", "Clippings cleared", "Weekly or fortnightly"] },
-  { name: "Hedge Trimming", price: "£45", unit: "per hedge", popular: true, feats: ["Trimmed & shaped", "All cuttings removed", "One-off or seasonal"] },
-  { name: "Borders & Beds", price: "£35", unit: "per session", popular: false, feats: ["Weed, plant & mulch", "Bark chip available", "Kept tidy year-round"] },
-  { name: "Garden Clearance", price: "£150", unit: "per project", popular: false, feats: ["Overgrown gardens", "Full waste removal", "Quoted after a look"] },
+type Price = {
+  name: string;
+  price: string;
+  unit: string;
+  popular: boolean;
+  feats: string[];
+  hideFrom?: boolean;
+};
+
+const PRICES: Price[] = [
+  { name: "Regular Mowing", price: "£25", unit: "per visit", popular: false, feats: ["Mow, edge & stripe", "Clippings cleared", "Weekly or fortnightly"] },
+  { name: "Hedge Trimming", price: "Quoted", unit: "from photos", popular: true, hideFrom: true, feats: ["Send photos through the form", "Price depends on size, access, height & waste", "Confirmed before any booking or payment"] },
+  { name: "Garden Clearance", price: "£110", unit: "per project", popular: false, feats: ["Overgrown gardens", "Full waste removal", "Quoted after a look"] },
 ];
 
 const FAQS = [
@@ -184,8 +192,18 @@ export default function ServicesPage() {
                   {p.name}
                 </div>
                 <div style={{ marginTop: 12, display: "flex", alignItems: "baseline", gap: 6 }}>
-                  <span style={{ fontSize: 16, fontWeight: 600, color: dark ? "#c3d1b6" : "#8a9680" }}>from</span>
-                  <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: 52, lineHeight: 0.8, color: dark ? "#ffffff" : "#14432a" }}>
+                  {!p.hideFrom && (
+                    <span style={{ fontSize: 16, fontWeight: 600, color: dark ? "#c3d1b6" : "#8a9680" }}>from</span>
+                  )}
+                  <span
+                    style={{
+                      fontFamily: "var(--font-heading)",
+                      fontWeight: 800,
+                      fontSize: p.hideFrom ? 40 : 52,
+                      lineHeight: 0.85,
+                      color: dark ? "#ffffff" : "#14432a",
+                    }}
+                  >
                     {p.price}
                   </span>
                 </div>
@@ -202,9 +220,10 @@ export default function ServicesPage() {
             );
           })}
         </div>
-        <div style={{ marginTop: 18, textAlign: "center", fontSize: 14, color: "#8a9680" }}>
-          Prices are a guide only and depend on garden size, access and condition. First visit gets{" "}
-          <strong style={{ color: "#5f8a2e" }}>20% off</strong>.
+        <div style={{ marginTop: 18, textAlign: "center", fontSize: 14, color: "#8a9680", maxWidth: 720, marginLeft: "auto", marginRight: "auto", lineHeight: 1.55 }}>
+          Prices are a guide only and depend on garden size, access and condition. Hedge, shrub and small-tree work is
+          quoted from photos — cost varies by scope, access, height and waste handling, and is always confirmed before any
+          booking or payment. First visit gets <strong style={{ color: "#5f8a2e" }}>20% off</strong>.
         </div>
       </section>
 

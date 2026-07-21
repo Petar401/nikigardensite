@@ -69,7 +69,7 @@ export default function PrivacyPage() {
           <p>
             Niki&apos;s Lawn &amp; Garden Services is a sole-trader gardening
             business based in Norwich, Norfolk. You can reach us at{" "}
-            <a href="mailto:hello@nikislawngardens.co.uk">hello@nikislawngardens.co.uk</a>{" "}
+            <a href="mailto:info@nikislawngardens.co.uk">info@nikislawngardens.co.uk</a>{" "}
             or on <a href="tel:+447843818290">07843 818290</a>. For any privacy
             question — including a request to see, correct or delete your data —
             use those same contacts.
@@ -137,7 +137,7 @@ export default function PrivacyPage() {
           <p>
             Under UK GDPR you can ask us to show you the data we hold about you,
             correct anything that&apos;s wrong, delete it, or restrict how we
-            use it. Email <a href="mailto:hello@nikislawngardens.co.uk">hello@nikislawngardens.co.uk</a> and
+            use it. Email <a href="mailto:info@nikislawngardens.co.uk">info@nikislawngardens.co.uk</a> and
             we&apos;ll respond within a month. If you&apos;re not happy with our
             reply you have the right to complain to the Information
             Commissioner&apos;s Office at <a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer">ico.org.uk</a>.
