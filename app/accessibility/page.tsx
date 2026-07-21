@@ -127,8 +127,8 @@ export default function AccessibilityPage() {
             If you&apos;ve hit a barrier — a button you can&apos;t reach, an
             image with no description, a form you can&apos;t complete — please
             email{" "}
-            <a href="mailto:hello@nikislawngardens.co.uk">
-              hello@nikislawngardens.co.uk
+            <a href="mailto:info@nikislawngardens.co.uk">
+              info@nikislawngardens.co.uk
             </a>{" "}
             or call <a href="tel:+447843818290">07843 818290</a>. Tell us the
             page you were on and what went wrong; we&apos;ll aim to reply within

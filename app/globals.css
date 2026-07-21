@@ -1004,3 +1004,44 @@ textarea.fld {
 .foot-link-button:hover {
   color: var(--lime);
 }
+
+/* ---------- global focus + form polish ---------- */
+
+.btn:focus-visible,
+.nav-link:focus-visible,
+.foot-link:focus-visible,
+.foot-link-button:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  filter: saturate(0.6);
+}
+
+.fld-file {
+  padding: 10px 12px;
+  cursor: pointer;
+  background: #fbf8f0;
+}
+.fld-file::file-selector-button {
+  margin-right: 12px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: var(--forest);
+  color: #fff;
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.fld-file::file-selector-button:hover {
+  background: var(--forest-deep);
+}
+
