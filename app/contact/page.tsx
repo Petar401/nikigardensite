@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Image from "next/image";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import lawnStripes from "@/public/assets/lawn-stripes.jpg";
 
 const MAX_FILES = 5;
 const MAX_TOTAL_BYTES = 9 * 1024 * 1024; // Web3Forms hard cap is 10 MB — leave headroom for form fields.
@@ -83,7 +85,15 @@ export default function ContactPage() {
 
       {/* ============ PAGE HEADER ============ */}
       <section style={{ position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "url('/assets/lawn-stripes.jpg') center 40%/cover no-repeat" }} />
+        <Image
+          src={lawnStripes}
+          alt=""
+          fill
+          priority
+          placeholder="blur"
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "center 40%" }}
+        />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(9,24,14,.8), rgba(9,24,14,.66))" }} />
         <div style={{ position: "relative", maxWidth: 1200, margin: "0 auto", padding: "60px 24px 64px", textAlign: "center" }}>
           <div style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 13, letterSpacing: 2.4, color: "#cfe8a8" }}>
@@ -102,7 +112,7 @@ export default function ContactPage() {
       {/* ============ CONTACT BODY ============ */}
       <section className="contact-grid" style={{ maxWidth: 1120, margin: "0 auto", padding: "70px 24px 90px" }}>
         {/* FORM */}
-        <div style={{ background: "#fff", border: "1px solid #e6ddc6", borderRadius: 18, padding: "34px 34px 38px", boxShadow: "0 10px 30px rgba(20,60,36,.09)" }}>
+        <div className="contact-form-card" style={{ background: "#fff", border: "1px solid #e6ddc6", borderRadius: 18, boxShadow: "0 10px 30px rgba(20,60,36,.09)" }}>
           {submitted ? (
             <div style={{ textAlign: "center", padding: "36px 10px" }}>
               <div style={{ width: 72, height: 72, margin: "0 auto", borderRadius: "50%", background: "#e2eecb", display: "flex", alignItems: "center", justifyContent: "center" }}>

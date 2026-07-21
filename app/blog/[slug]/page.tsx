@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -89,15 +90,22 @@ export default async function BlogPostPage({
 
       {/* ============ ARTICLE HERO ============ */}
       <section style={{ position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: `url('${post.image}')`, backgroundSize: "cover", backgroundPosition: "center 60%" }} />
+        <Image
+          src={post.image}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "center 60%" }}
+        />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(9,24,14,.72), rgba(9,24,14,.72))" }} />
         <div style={{ position: "relative", maxWidth: 820, margin: "0 auto", padding: "60px 24px 64px" }}>
-          <Link href="/blog" style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 12.5, letterSpacing: 1.6, textTransform: "uppercase", color: "#cfe8a8", textDecoration: "none" }}>
+          <Link href="/blog" style={{ display: "inline-flex", alignItems: "center", fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 13, letterSpacing: 1.6, textTransform: "uppercase", color: "#cfe8a8", textDecoration: "none", padding: "8px 4px", minHeight: 44 }}>
             &larr; Back to the blog
           </Link>
-          <div style={{ marginTop: 18, display: "flex", gap: 9, flexWrap: "wrap" }}>
+          <div style={{ marginTop: 12, display: "flex", gap: 9, flexWrap: "wrap" }}>
             {post.tags.map((t) => (
-              <span key={t} style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 11.5, letterSpacing: 1, textTransform: "uppercase", color: "#14432a", background: "rgba(191,232,138,.9)", borderRadius: 20, padding: "4px 12px" }}>
+              <span key={t} style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 12.5, letterSpacing: 1, textTransform: "uppercase", color: "#14432a", background: "rgba(191,232,138,.9)", borderRadius: 20, padding: "5px 12px" }}>
                 {t}
               </span>
             ))}
