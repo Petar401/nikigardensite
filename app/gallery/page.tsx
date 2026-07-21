@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -28,9 +28,39 @@ const FILTERS = [
 export default function GalleryPage() {
   const [filter, setFilter] = useState("all");
   const [lightbox, setLightbox] = useState(-1);
+  const touchStartX = useRef<number | null>(null);
 
   const visible = filter === "all" ? PHOTOS : PHOTOS.filter((p) => p.cat === filter);
   const active = lightbox >= 0 && lightbox < visible.length ? visible[lightbox] : null;
+
+  function onTouchStart(e: React.TouchEvent) {
+    touchStartX.current = e.touches[0].clientX;
+  }
+  function onTouchEnd(e: React.TouchEvent) {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(dx) > 50) {
+      if (dx < 0) setLightbox((v) => (v + 1) % visible.length);
+      else setLightbox((v) => (v - 1 + visible.length) % visible.length);
+    }
+    touchStartX.current = null;
+  }
+
+  useEffect(() => {
+    if (lightbox < 0) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(-1);
+      else if (e.key === "ArrowRight") setLightbox((v) => (v + 1) % visible.length);
+      else if (e.key === "ArrowLeft") setLightbox((v) => (v - 1 + visible.length) % visible.length);
+    };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [lightbox, visible.length]);
 
   return (
     <>
@@ -121,6 +151,11 @@ export default function GalleryPage() {
       {active && (
         <div
           onClick={() => setLightbox(-1)}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+          role="dialog"
+          aria-modal="true"
+          aria-label={active.title}
           style={{
             position: "fixed",
             inset: 0,
@@ -136,6 +171,7 @@ export default function GalleryPage() {
           <button
             onClick={() => setLightbox(-1)}
             aria-label="Close"
+            className="lightbox-close"
             style={{
               position: "absolute",
               top: 22,
@@ -161,6 +197,7 @@ export default function GalleryPage() {
               setLightbox((v) => (v - 1 + visible.length) % visible.length);
             }}
             aria-label="Previous photo"
+            className="lightbox-prev"
             style={{
               position: "absolute",
               left: 26,
@@ -184,6 +221,7 @@ export default function GalleryPage() {
               setLightbox((v) => (v + 1) % visible.length);
             }}
             aria-label="Next photo"
+            className="lightbox-next"
             style={{
               position: "absolute",
               right: 26,

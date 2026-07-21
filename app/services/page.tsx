@@ -1,14 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import lawnStripes from "@/public/assets/lawn-stripes.jpg";
+import hedge from "@/public/assets/hedge.jpg";
+import flowerBed from "@/public/assets/flower-bed.jpg";
+import roseMulch from "@/public/assets/rose-mulch.jpg";
 
 const SERVICES = [
   {
     kicker: "LAWN CARE",
     title: "Lawns",
-    bg: "/assets/lawn-stripes.jpg",
+    bg: lawnStripes,
     reverse: false,
     desc: "The heart of most gardens. I’ll keep yours neat, healthy and striped — from a quick weekly cut to reviving a tired lawn or laying fresh turf.",
     items: ["Mowing & edging", "Decorative striping", "Feeding & weed control", "Scarifying & aerating", "Fresh turf laid", "Seasonal treatments"],
@@ -16,7 +21,7 @@ const SERVICES = [
   {
     kicker: "HEDGES, SHRUBS & SMALL TREES",
     title: "Hedges, shrubs & small trees",
-    bg: "/assets/hedge.jpg",
+    bg: hedge,
     reverse: true,
     desc: "Crisp hedges, tidy shrubs and well-shaped small trees. I’ll trim, shape and reduce sensibly — then clear every last cutting away. Send photos through the contact form and I’ll confirm a fair price before we book anything.",
     items: ["Hedge trimming", "Shrub shaping", "Small-tree pruning", "Height reductions", "Overgrowth tidy-ups", "All waste removed"],
@@ -24,7 +29,7 @@ const SERVICES = [
   {
     kicker: "BORDERS & BEDS",
     title: "Borders & Beds",
-    bg: "/assets/flower-bed.jpg",
+    bg: flowerBed,
     reverse: false,
     desc: "Beds that look cared for all year. Planting, weeding and a fresh layer of mulch or bark to keep things tidy and thriving.",
     items: ["Planting", "Weeding", "Mulching", "Bark chip", "Bed re-edging", "Seasonal colour"],
@@ -32,7 +37,7 @@ const SERVICES = [
   {
     kicker: "THE BIGGER JOBS",
     title: "Clearances & Tidies",
-    bg: "/assets/rose-mulch.jpg",
+    bg: roseMulch,
     reverse: true,
     desc: "Let it get away from you? No problem. From full overgrown clearances to a one-off tidy before guests arrive, I’ll get it back under control.",
     items: ["Full clearances", "One-off tidies", "Seasonal blitzes", "Rubbish removal", "Overgrown gardens", "Pre-sale spruce-ups"],
@@ -89,7 +94,15 @@ export default function ServicesPage() {
 
       {/* ============ PAGE HEADER ============ */}
       <section style={{ position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "url('/assets/flower-bed.jpg') center 60%/cover no-repeat" }} />
+        <Image
+          src={flowerBed}
+          alt=""
+          fill
+          priority
+          placeholder="blur"
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "center 60%" }}
+        />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(9,24,14,.78), rgba(9,24,14,.66))" }} />
         <div style={{ position: "relative", maxWidth: 1200, margin: "0 auto", padding: "64px 24px 68px", textAlign: "center" }}>
           <div style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 13, letterSpacing: 2.4, color: "#cfe8a8" }}>
@@ -112,15 +125,22 @@ export default function ServicesPage() {
             <div style={{ flex: "1 1 0", minWidth: 280 }}>
               <div
                 style={{
+                  position: "relative",
                   borderRadius: 16,
                   overflow: "hidden",
                   boxShadow: "0 18px 44px rgba(20,60,36,.2)",
                   aspectRatio: "5/4",
-                  backgroundImage: `url('${s.bg}')`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
                 }}
-              />
+              >
+                <Image
+                  src={s.bg}
+                  alt={s.title}
+                  fill
+                  placeholder="blur"
+                  sizes="(max-width: 860px) 100vw, 50vw"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
             </div>
             <div style={{ flex: "1 1 0", minWidth: 280 }}>
               <div style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 12.5, letterSpacing: 2, color: "#5f8a2e" }}>
@@ -130,7 +150,7 @@ export default function ServicesPage() {
                 {s.title}
               </h2>
               <p style={{ margin: "14px 0 0", fontSize: 17, lineHeight: 1.6, color: "#3c4837" }}>{s.desc}</p>
-              <div style={{ marginTop: 18, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px 20px" }}>
+              <div className="svc-feature-grid" style={{ marginTop: 18 }}>
                 {s.items.map((it) => (
                   <div key={it} style={{ display: "flex", alignItems: "center", gap: 9, fontSize: 15.5, fontWeight: 500, color: "#2b3724" }}>
                     <span style={{ flex: "0 0 auto", width: 20, height: 20, borderRadius: "50%", background: "#e2eecb", color: "#5f8a2e", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700 }}>
@@ -162,6 +182,7 @@ export default function ServicesPage() {
             return (
               <div
                 key={p.name}
+                className="price-card"
                 style={{
                   position: "relative",
                   background: dark ? "#14432a" : "#fff",
@@ -199,6 +220,7 @@ export default function ServicesPage() {
                     <span style={{ fontSize: 16, fontWeight: 600, color: dark ? "#c3d1b6" : "#8a9680" }}>from</span>
                   )}
                   <span
+                    className="price-card-value"
                     style={{
                       fontFamily: "var(--font-heading)",
                       fontWeight: 800,

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 const STORAGE_KEY = "nlg-cookie-consent";
@@ -10,6 +10,8 @@ type Consent = "accepted" | "rejected";
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
+  const bannerRef = useRef<HTMLDivElement>(null);
+  const acceptRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     try {
@@ -25,6 +27,55 @@ export default function CookieConsent() {
     window.addEventListener(REOPEN_EVENT, openHandler);
     return () => window.removeEventListener(REOPEN_EVENT, openHandler);
   }, []);
+
+  // Expose banner presence + measured height so floating buttons can offset above it.
+  useEffect(() => {
+    const body = document.body;
+    if (!visible) {
+      body.removeAttribute("data-cookie-visible");
+      body.style.removeProperty("--cookie-banner-h");
+      return;
+    }
+    body.setAttribute("data-cookie-visible", "true");
+    acceptRef.current?.focus();
+
+    const el = bannerRef.current;
+    if (!el) return;
+    const setHeight = () => {
+      body.style.setProperty("--cookie-banner-h", `${el.offsetHeight}px`);
+    };
+    setHeight();
+    const ro = new ResizeObserver(setHeight);
+    ro.observe(el);
+    return () => {
+      ro.disconnect();
+      body.removeAttribute("data-cookie-visible");
+      body.style.removeProperty("--cookie-banner-h");
+    };
+  }, [visible]);
+
+  // Simple focus trap between the two action buttons.
+  useEffect(() => {
+    if (!visible) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      const focusable = bannerRef.current?.querySelectorAll<HTMLElement>(
+        "a[href], button"
+      );
+      if (!focusable || focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [visible]);
 
   function decide(choice: Consent) {
     try {
@@ -42,9 +93,10 @@ export default function CookieConsent() {
 
   return (
     <div
+      ref={bannerRef}
       className="cookie-banner"
       role="dialog"
-      aria-live="polite"
+      aria-modal="true"
       aria-labelledby="cookie-banner-title"
     >
       <div className="cookie-banner-inner">
@@ -63,6 +115,7 @@ export default function CookieConsent() {
             Reject
           </button>
           <button
+            ref={acceptRef}
             type="button"
             className="btn btn-cta"
             onClick={() => decide("accepted")}

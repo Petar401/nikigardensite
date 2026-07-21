@@ -1,28 +1,34 @@
 import Link from "next/link";
+import Image from "next/image";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import { ElfsightReviews, BarkBadge } from "@/components/ReviewsWidgets";
+import frontBg from "@/public/assets/front-bg.jpg";
+import lawnStripes from "@/public/assets/lawn-stripes.jpg";
+import hedge from "@/public/assets/hedge.jpg";
+import flowerBed from "@/public/assets/flower-bed.jpg";
+import roseMulch from "@/public/assets/rose-mulch.jpg";
 
 const SERVICES = [
   {
     title: "Lawns",
     desc: "Mowing & edging, crisp stripes, feeding and fresh turf laid.",
-    bg: "/assets/lawn-stripes.jpg",
+    bg: lawnStripes,
   },
   {
     title: "Hedges, shrubs & small trees",
     desc: "Trimming, shaping and sensible reductions — send photos for a fair quote.",
-    bg: "/assets/hedge.jpg",
+    bg: hedge,
   },
   {
     title: "Borders & Beds",
     desc: "Planting, weeding, mulching and fresh bark chip.",
-    bg: "/assets/flower-bed.jpg",
+    bg: flowerBed,
   },
   {
     title: "The Bigger Jobs",
     desc: "Full clearances plus one-off and seasonal tidies.",
-    bg: "/assets/rose-mulch.jpg",
+    bg: roseMulch,
   },
 ];
 
@@ -53,12 +59,14 @@ export default function Home() {
 
       {/* ============ HERO ============ */}
       <section style={{ position: "relative", overflow: "hidden" }}>
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "url('/assets/front-bg.jpg') center 55%/cover no-repeat",
-          }}
+        <Image
+          src={frontBg}
+          alt=""
+          fill
+          priority
+          placeholder="blur"
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "center 55%" }}
         />
         <div
           style={{
@@ -129,12 +137,15 @@ export default function Home() {
                 Call 07843 818290
               </a>
             </div>
-            <div style={{ marginTop: 30, display: "flex", gap: 22, flexWrap: "wrap" }}>
+            <div style={{ marginTop: 30, display: "flex", gap: "10px 22px", flexWrap: "wrap" }}>
               {["Fully insured", "Waste-carrier licensed", "Free, no-obligation quotes"].map((t) => (
                 <div key={t} style={{ display: "flex", alignItems: "center", gap: 8, color: "#dbe6cf", fontSize: 14.5, fontWeight: 500 }}>
                   <span style={{ color: "#bfe88a", fontSize: 17 }}>&#10003;</span> {t}
                 </div>
               ))}
+            </div>
+            <div className="hero-inline-pill">
+              <span>20% off your first visit</span>
             </div>
           </div>
         </div>
@@ -190,7 +201,16 @@ export default function Home() {
         <div style={{ marginTop: 44, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 22 }}>
           {SERVICES.map((s) => (
             <Link key={s.title} href="/services" className="service-card">
-              <div style={{ height: 168, backgroundImage: `url('${s.bg}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
+              <div style={{ position: "relative", height: 168 }}>
+                <Image
+                  src={s.bg}
+                  alt=""
+                  fill
+                  placeholder="blur"
+                  sizes="(max-width: 560px) 100vw, (max-width: 980px) 50vw, 25vw"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
               <div style={{ padding: "20px 20px 22px" }}>
                 <h3 style={{ margin: 0, fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 24, letterSpacing: 0.3, color: "#14432a" }}>
                   {s.title}

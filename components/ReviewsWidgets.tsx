@@ -56,7 +56,9 @@ export function ElfsightReviews() {
   return (
     <>
       <Script src="https://elfsightcdn.com/platform.js" strategy="lazyOnload" async />
-      <div className={`elfsight-app-${widgetId}`} data-elfsight-app-lazy />
+      <div className="widget-elfsight">
+        <div className={`elfsight-app-${widgetId}`} data-elfsight-app-lazy />
+      </div>
     </>
   );
 }
@@ -83,18 +85,20 @@ export function BarkBadge() {
         src="https://www.bark.com/assets/js/frontend-v2/widgets-v2.1dc2c9b7ea23e9fcfdf5ee373ee1a493.v2.js"
         strategy="lazyOnload"
       />
-      <a
-        href="https://www.bark.com/en/gb/company/nikis-lawn-and-garden-services/J47GK/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bark-widget"
-        data-type="reviews"
-        data-id="J47GK"
-        data-image="medium-gold"
-        data-version="3.0"
-      >
-        Nikis Lawn and Garden Services
-      </a>
+      <div className="widget-bark">
+        <a
+          href="https://www.bark.com/en/gb/company/nikis-lawn-and-garden-services/J47GK/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bark-widget"
+          data-type="reviews"
+          data-id="J47GK"
+          data-image="medium-gold"
+          data-version="3.0"
+        >
+          Nikis Lawn and Garden Services
+        </a>
+      </div>
     </div>
   );
 }

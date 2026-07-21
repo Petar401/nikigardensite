@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import { POSTS } from "./posts";
+import summerGardenCare from "@/public/assets/summer-garden-care.jpg";
 
 export const metadata: Metadata = {
   title: "Garden Care Blog",
@@ -33,7 +35,15 @@ export default function BlogPage() {
 
       {/* ============ PAGE HEADER ============ */}
       <section style={{ position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "url('/assets/summer-garden-care.jpg') center 60%/cover no-repeat" }} />
+        <Image
+          src={summerGardenCare}
+          alt=""
+          fill
+          priority
+          placeholder="blur"
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "center 60%" }}
+        />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(9,24,14,.78), rgba(9,24,14,.66))" }} />
         <div style={{ position: "relative", maxWidth: 1200, margin: "0 auto", padding: "64px 24px 68px", textAlign: "center" }}>
           <div style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 13, letterSpacing: 2.4, color: "#cfe8a8" }}>
@@ -51,13 +61,21 @@ export default function BlogPage() {
 
       {/* ============ POST GRID ============ */}
       <section style={{ maxWidth: 1120, margin: "0 auto", padding: "72px 24px 90px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 26 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))", gap: 26 }}>
           {POSTS.map((p) => (
             <Link key={p.slug} href={`/blog/${p.slug}`} className="service-card">
-              <div style={{ height: 200, backgroundImage: `url('${p.image}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
+              <div style={{ position: "relative", height: 200 }}>
+                <Image
+                  src={p.image}
+                  alt={p.imageAlt}
+                  fill
+                  sizes="(max-width: 560px) 100vw, (max-width: 980px) 50vw, 33vw"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
               <div style={{ padding: "22px 22px 24px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-                  <span style={{ fontFamily: "var(--font-label)", fontWeight: 700, fontSize: 11.5, letterSpacing: 1, textTransform: "uppercase", color: "#5f8a2e", background: "#eef4e2", borderRadius: 20, padding: "4px 11px" }}>
+                  <span className="blog-tag">
                     {p.tags[0]}
                   </span>
                   <span style={{ fontSize: 13, color: "#8a9680" }}>
