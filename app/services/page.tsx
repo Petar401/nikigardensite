@@ -52,6 +52,9 @@ const PRICES: Price[] = [
   { name: "Regular Mowing", price: "£25", unit: "per visit", popular: false, feats: ["Mow, edge & stripe", "Clippings cleared", "Weekly or fortnightly"] },
   { name: "Hedge Trimming", price: "Quoted", unit: "from photos", popular: true, hideFrom: true, feats: ["Send photos through the form", "Price depends on size, access, height & waste", "Confirmed before any booking or payment"] },
   { name: "Garden Clearance", price: "£110", unit: "per project", popular: false, feats: ["Overgrown gardens", "Full waste removal", "Quoted after a look"] },
+  { name: "Garden Maintenance", price: "£35", unit: "per hour", popular: false, feats: ["Regular ongoing care", "Kept fresh and calm", "Weekly, fortnightly or monthly"] },
+  { name: "Bed & Border Clearance", price: "£60", unit: "per project", popular: false, feats: ["Weeds & tired planting removed", "Messy borders tidied", "Ready for fresh planting or mulch"] },
+  { name: "Leaf Clearance", price: "£35", unit: "seasonal reset", popular: false, feats: ["Paths, lawns & borders cleared", "Quick, satisfying clear-outs", "Before things get messy"] },
 ];
 
 const FAQS = [
