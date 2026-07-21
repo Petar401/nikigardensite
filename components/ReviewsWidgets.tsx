@@ -62,18 +62,13 @@ export function ElfsightReviews() {
 }
 
 /**
- * Bark reviews badge for Niki's Lawn & Garden Services
- * (https://www.bark.com/en/gb/b/nikis-lawn-and-garden-services/J47GK/).
- *
- * We load Bark's v2 widget bundle and drop a container div with the seller
- * slug + id — Bark's script auto-hydrates matching containers. If the widget
- * doesn't render (attribute names sometimes change across script versions),
- * the styled outbound button below stays visible as a graceful fallback.
+ * Bark reviews badge for Niki's Lawn & Garden Services — official Bark
+ * "medium-gold" embed snippet. Bark's v2 widget script scans for anchors with
+ * `class="bark-widget"` and hydrates them in place with the badge image.
+ * The anchor text ("Nikis Lawn and Garden Services") is the graceful
+ * degradation if the script never loads.
  */
 export function BarkBadge() {
-  const barkUrl =
-    "https://www.bark.com/en/gb/b/nikis-lawn-and-garden-services/J47GK/";
-
   return (
     <div
       style={{
@@ -87,47 +82,18 @@ export function BarkBadge() {
       <Script
         src="https://www.bark.com/assets/js/frontend-v2/widgets-v2.1dc2c9b7ea23e9fcfdf5ee373ee1a493.v2.js"
         strategy="lazyOnload"
-        async
-      />
-      <div
-        className="bark-widget"
-        data-widget="reviews-badge"
-        data-slug="nikis-lawn-and-garden-services"
-        data-id="J47GK"
       />
       <a
-        href={barkUrl}
+        href="https://www.bark.com/en/gb/company/nikis-lawn-and-garden-services/J47GK/"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="See Niki's Lawn & Garden Services reviews on Bark"
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: 8,
-          padding: "10px 18px",
-          borderRadius: 999,
-          background: "#fff",
-          border: "1px solid #e6ddc6",
-          color: "#14432a",
-          fontFamily: "var(--font-label)",
-          fontWeight: 700,
-          fontSize: 14,
-          letterSpacing: 0.5,
-          textDecoration: "none",
-          boxShadow: "0 4px 14px rgba(20,60,36,.06)",
-        }}
+        className="bark-widget"
+        data-type="reviews"
+        data-id="J47GK"
+        data-image="medium-gold"
+        data-version="3.0"
       >
-        <span
-          aria-hidden="true"
-          style={{
-            display: "inline-block",
-            width: 8,
-            height: 8,
-            borderRadius: "50%",
-            background: "#f4a11d",
-          }}
-        />
-        Reviewed on Bark →
+        Nikis Lawn and Garden Services
       </a>
     </div>
   );
